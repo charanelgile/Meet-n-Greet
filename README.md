@@ -4,18 +4,16 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp; A video chat application developed using NodeJS, ExpressJS, Socket.io, and WebRTC technology. This serves as final project for Streamline's Working Assessment.
 
----
-
 ## <span style="color: rgb(13, 132, 212)"> **App Features:** </span>
 
 - ### **_Video Calls_**
   - User has a Personal Code that can be shared to other users to start direct video calls
   - User also has the option to connect with random users by checking the box “Allow connection from Strangers”
-  - Video call features include
-    1. Mute and Unmute
-    2. Turn Camera On or Off
-    3. Screen, Window, or Tab Sharing, and;
-    4. Video Call Recording
+  - Video call features include:
+    - Mute and Unmute
+    - Turn Camera On or Off
+    - Screen, Window, or Tab Sharing, and;
+    - Video Call Recording
   - A busy notification will be sent to a user when trying to connect to another user who is in the middle of a video call
 - ### **_Messaging_**
   - The application also has a built-in chat feature which can be used to exchange messages even while on video call
