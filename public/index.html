@@ -6,10 +6,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Meet n' Greet</title>
 
+    <link rel="stylesheet" href="./css/style.css" />
+
     <script src="./js/main.js" type="module"></script>
     <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
-    <h2 style="color: rgb(13, 212, 206)">Meet n' Greet Landing Page</h2>
+    <div class="main_container">
+      <!-- Left Container - Dashboard -->
+      <div class="dashboard_container">
+        <!-- Logo -->
+        <div class="logo_container">
+          <img src="./utils/images/logo.png" alt="app logo" />
+        </div>
+
+        <div>
+          <!-- Tagline -->
+          <div class="description_container">
+            <p class="description_container_paragraph">
+              Communicate with other users through Personal Code or random
+              connections
+            </p>
+          </div>
+
+          <!-- Your Personal Code -->
+          <div class="personal_code_container">
+            <div class="personal_code_title_container">
+              <p class="personal_code_title_paragraph">
+                Your Personal Code is:
+              </p>
+            </div>
+
+            <div class="personal_code_value_container">
+              <p
+                class="personal_code_value_paragraph"
+                id="personal_code_paragraph">
+                a$40y8C3q1%9r265c7
+              </p>
+
+              <button
+                class="personal_code_copy_button"
+                id="personal_code_copy_button">
+                <img
+                  src="./utils/images/copyButton.png"
+                  alt="copy button icon" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Connect via Personal Code -->
+        <div class="personal_code_connecting_container">
+          <p class="personal_code_connecting_paragraph">
+            Connect via Personal Code
+          </p>
+
+          <div class="personal_code_connecting_input_container">
+            <input class="personal_code_input" id="personal_code_input" />
+          </div>
+
+          <div class="personal_code_connecting_buttons_container">
+            <!-- Button for Chat using Personal Code -->
+            <button class="connecting_button" id="personal_code_chat_button">
+              <img
+                src="./utils/images/chatButton.png"
+                alt="button for chat using personal code"
+                class="connecting_buttons_image" />
+            </button>
+
+            <!-- Button for Video Call using Personal Code -->
+            <button class="connecting_button" id="personal_code_video_button">
+              <img
+                src="./utils/images/videoButton.png"
+                alt="button for video call using personal code"
+                class="connecting_buttons_image" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Connect with Strangers -->
+        <div class="stranger_connecting_container">
+          <p class="stranger_title_container">Connect with Strangers</p>
+
+          <div class="stranger_buttons_container">
+            <!-- Button for Chat with Strangers -->
+            <button class="connecting_button" id="stranger_chat_button">
+              <img
+                src="./utils/images/chatButton.png"
+                alt="button for chat with strangers"
+                class="connecting_buttons_image" />
+            </button>
+
+            <!-- Button for Video Call with Strangers -->
+            <button class="connecting_button" id="stranger_video_button">
+              <img
+                src="./utils/images/videoButton.png"
+                alt="button for video call with strangers"
+                class="connecting_buttons_image" />
+            </button>
+          </div>
+        </div>
+
+        <!-- Checkbox to Allow Connection from Strangers -->
+        <div class="checkbox_container">
+          <div class="checkbox_connection" id="allow_strangers_checkbox">
+            <img
+              src="./utils/images/check.png"
+              alt="checkbox to allow connection from strangers"
+              id="allow_strangers_checkbox_image"
+              class="display_none" />
+          </div>
+
+          <p class="checkbox_container_paragraph">
+            Allow connection from strangers
+          </p>
+        </div>
+
+        <div class="dashboard_blur display_none" id="dashboard_blur"></div>
+      </div>
+
+      <!-- Middle Container - Video Calls -->
+      <div class="call_container"></div>
+
+      <!-- Right Container - Chats -->
+      <div class="messenger_container"></div>
+    </div>
   </body>
 </html>
