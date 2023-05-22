@@ -28,18 +28,20 @@ personalCodeCopyButton.addEventListener("click", () => {
 
 // Chat using Personal Code
 personalCodeChatButton.addEventListener("click", () => {
-  const calleePersonalCode = document.getElementById(
-    "personal_code_input"
-  ).value;
   const callType = constants.callType.CHAT_PERSONAL_CODE;
+  const calleePersonalCode = document.getElementById(
+    "personal_code_input" // Other User's Personal Code from the Input Box
+  ).value;
+
   webRTChandler.sendPreOffer(callType, calleePersonalCode);
 });
 
 // Video Call using Personal Code
 personalCodeVideoButton.addEventListener("click", () => {
-  const calleePersonalCode = document.getElementById(
-    "personal_code_input"
-  ).value;
   const callType = constants.callType.VIDEO_PERSONAL_CODE;
+  const calleePersonalCode = document.getElementById(
+    "personal_code_input" // Other User's Personal Code from the Input Box
+  ).value;
+
   webRTChandler.sendPreOffer(callType, calleePersonalCode);
 });
