@@ -13,7 +13,7 @@
   </head>
   <body>
     <div class="main_container">
-      <!-- Left Container - Dashboard -->
+      <!-- Left Panel - Dashboard -->
       <div class="dashboard_container">
         <!-- Logo -->
         <div class="logo_container">
@@ -125,10 +125,97 @@
         <div class="dashboard_blur display_none" id="dashboard_blur"></div>
       </div>
 
-      <!-- Middle Container - Video Calls -->
-      <div class="call_container"></div>
+      <!-- Middle Panel - Video Calls -->
+      <div class="call_container">
+        <div class="videos_container">
+          <div id="video_placeholder" class="videos_placeholder">
+            <img src="./utils/images/logo.png" alt="app logo" />
+          </div>
 
-      <!-- Right Container - Chats -->
+          <video
+            id="remote_video"
+            class="remote_video display_none"
+            autoplay></video>
+
+          <!-- Local Video Preview -->
+          <div class="local_video_container">
+            <video id="local_video" class="local_video" autoplay muted></video>
+          </div>
+
+          <!-- Video Call Controls -->
+          <div id="call_buttons" class="call_buttons_container display_none">
+            <!-- Mic Button -->
+            <button class="call_button_small" id="mic_button">
+              <img
+                src="./utils/images/mic.png"
+                alt="button for mic"
+                id="mic_button_image" />
+            </button>
+
+            <!-- Camera Button -->
+            <button class="call_button_small" id="camera_button">
+              <img
+                src="./utils/images/camera.png"
+                alt="button for camera"
+                id="camera_button_image" />
+            </button>
+
+            <!-- Hang Up Button -->
+            <button class="call_button_large" id="hang_up_button">
+              <img
+                src="./utils/images/hangUp.png"
+                alt="button to hang up call" />
+            </button>
+
+            <!-- Sharing Button - Screen, Window, or Tab -->
+            <button class="call_button_small" id="screen_sharing_button">
+              <img
+                src="./utils/images/switchCameraScreenSharing.png"
+                alt="button for screen sharing" />
+            </button>
+
+            <!-- Video Call Recording Button -->
+            <button class="call_button_small" id="start_recording_button">
+              <img
+                src="./utils/images/recordingStart.png"
+                alt="button to record video call" />
+            </button>
+          </div>
+
+          <div
+            class="finish_chat_button_container display_none"
+            id="finish_chat_button_container">
+            <!-- End Video Call Button -->
+            <button class="call_button_large" id="finish_chat_call_button">
+              <img
+                src="./utils/images/hangUp.png"
+                alt="button to end video call" />
+            </button>
+          </div>
+
+          <!-- Video Call Recording Controls -->
+          <div
+            class="video_recording_buttons_container display_none"
+            id="video_recording_buttons">
+            <!-- Pause Recording -->
+            <button id="pause_recording_button">
+              <img src="./utils/images/pause.png" />
+            </button>
+
+            <!-- Resume Recording -->
+            <button id="resume_recording_button" class="display_none">
+              <img src="./utils/images/resume.png" />
+            </button>
+
+            <!-- Stop Recording -->
+            <button id="stop_recording_button">
+              &nbsp;&nbsp;Stop Recording
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel - Chats -->
       <div class="messenger_container"></div>
     </div>
   </body>

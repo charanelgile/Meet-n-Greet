@@ -289,7 +289,8 @@ body {
 
 .videos_container {
   position: relative;
-  height: calc(100% - 70px);
+  /* height: calc(100% - 70px); */
+  height: 80vh;
   margin: 30px 40px 40px 40px;
   border-radius: 15px;
   background: linear-gradient(168.68deg, #0052c9 1.12%, #0a91db 100%);
