@@ -217,7 +217,8 @@ body {
 .new_message_input {
   margin: 0 40px;
   margin-bottom: 30px;
-  width: calc(100% - 80px);
+  /* width: calc(100% - 80px); */
+  width: 50%;
   height: 60px;
   color: #676f7a;
   font-size: 16px;
