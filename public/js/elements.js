@@ -72,3 +72,60 @@ export const getIncomingCallDialogue = (
 
   return dialog;
 };
+
+export const getCallingDialogue = (cancelCallHandler) => {
+  // Create full-page blurred container
+  const dialog = document.createElement("div");
+  dialog.classList.add("dialog_wrapper");
+
+  // Create dialog box
+  const dialogContent = document.createElement("div");
+  dialogContent.classList.add("dialog_content");
+
+  // Create a paragraph for the incoming type of request
+  const title = document.createElement("paragraph");
+  title.classList.add("dialog_title");
+  title.innerHTML = `Outgoing request...`;
+
+  // Create avatar image container
+  const imageContainer = document.createElement("div");
+  imageContainer.classList.add("dialog_image_container");
+
+  // Create avatar image
+  const image = document.createElement("img");
+  const avatarImagePath = "./utils/images/dialogAvatar.png";
+  image.src = avatarImagePath;
+
+  // Create button container
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("dialog_button_container");
+
+  // Create button - Cancel Call
+  const cancelCallButton = document.createElement("button");
+  cancelCallButton.classList.add("dialog_reject_call_button");
+  const cancelCallImage = document.createElement("img");
+  cancelCallImage.classList.add("dialog_button_image");
+  const cancelCallImagePath = "./utils/images/rejectCall.png";
+  cancelCallImage.src = cancelCallImagePath;
+
+  // ----------------------------------------
+
+  // Append the avatar image to the container
+  imageContainer.appendChild(image);
+
+  // Append the button image to the button
+  cancelCallButton.append(cancelCallImage);
+
+  // Append the button to the container
+  buttonContainer.appendChild(cancelCallButton);
+
+  // Append the containers to the dialog box
+  dialogContent.appendChild(title);
+  dialogContent.appendChild(imageContainer);
+  dialogContent.appendChild(buttonContainer);
+
+  // Append the dialog box to the blurred container
+  dialog.appendChild(dialogContent);
+
+  return dialog;
+};

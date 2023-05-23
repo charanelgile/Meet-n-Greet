@@ -30,3 +30,14 @@ export const showIncomingCallDialogue = (
   // ... before appending a new dialog box
   dialog.appendChild(incomingCallDialogue);
 };
+
+export const showCallingDialogue = (cancelCallHandler) => {
+  const callingDialogue = elements.getCallingDialogue(cancelCallHandler);
+
+  const dialog = document.getElementById("dialog");
+
+  // Cleanup any element in the dialog box container div first...
+  dialog.querySelectorAll("*").forEach((element) => element.remove());
+  // ... before appending a new dialog box
+  dialog.appendChild(callingDialogue);
+};

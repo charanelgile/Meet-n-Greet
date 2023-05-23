@@ -4,15 +4,29 @@ import * as constants from "./constants.js";
 
 let connectedUserDetails;
 
+// Sending Video Call or Chat Request
 export const sendPreOffer = (callType, calleePersonalCode) => {
-  const data = {
+  connectedUserDetails = {
+    socketId: calleePersonalCode,
     callType,
-    calleePersonalCode,
   };
 
-  wss.sendPreOffer(data);
+  if (
+    callType === constants.callType.CHAT_PERSONAL_CODE ||
+    callType === constants.callType.VIDEO_PERSONAL_CODE
+  ) {
+    const data = {
+      callType,
+      calleePersonalCode,
+    };
+
+    ui.showCallingDialogue(cancelCallHandler);
+
+    wss.sendPreOffer(data);
+  }
 };
 
+// Receiving Video Call or Chat Request
 export const handlePreOffer = (data) => {
   const { callType, callerSocketId } = data;
 
@@ -30,9 +44,13 @@ export const handlePreOffer = (data) => {
 };
 
 const acceptCallHandler = () => {
-  console.log("Call accepted");
+  console.log("Request accepted");
 };
 
 const rejectCallHandler = () => {
-  console.log("Call rejected");
+  console.log("Request rejected");
+};
+
+const cancelCallHandler = () => {
+  console.log("Request cancelled");
 };
