@@ -31,7 +31,7 @@ io.on("connection", (socket) => {
       (socketID) => socketID === calleePersonalCode
     );
 
-    console.log(otherConnectedUser);
+    console.log(`Attempting to connect to User: ${otherConnectedUser}`);
 
     if (otherConnectedUser) {
       const data = {

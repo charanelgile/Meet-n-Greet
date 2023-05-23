@@ -30,7 +30,7 @@ export const handlePreOffer = (data) => {
 };
 
 const acceptCallHandler = () => {
-  console.log("Call approved");
+  console.log("Call accepted");
 };
 
 const rejectCallHandler = () => {
