@@ -27,6 +27,9 @@ export const registerSocketEvents = (socket) => {
 
 // Emit "pre-offer" event to the Server
 export const sendPreOffer = (data) => {
-  console.log('\nEmitting "pre-offer" event...');
+  data.callType === "VIDEO_PERSONAL_CODE" || data.callType === "VIDEO_STRANGER"
+    ? console.log('\nEmitting "pre-offer" event\nVideo Call request sent...')
+    : console.log('\nEmitting "pre-offer" event\nChat request sent...');
+
   socketIO.emit("pre-offer", data);
 };

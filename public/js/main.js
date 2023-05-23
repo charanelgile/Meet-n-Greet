@@ -2,7 +2,6 @@ import * as store from "./store.js";
 import * as wss from "./wss.js";
 import * as webRTChandler from "./webRTChandler.js";
 import * as constants from "./constants.js";
-import { getIncomingCallDialogue } from "./elements.js";
 
 // Establish connection to Socket.IO Server
 const socket = io("/");
@@ -46,10 +45,3 @@ personalCodeVideoButton.addEventListener("click", () => {
 
   webRTChandler.sendPreOffer(callType, calleePersonalCode);
 });
-
-// Sample invocation of getIncomingCallDialogue() for testing purposes
-getIncomingCallDialogue(
-  "Video Call",
-  () => {},
-  () => {}
-);

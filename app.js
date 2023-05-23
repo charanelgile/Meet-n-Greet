@@ -19,12 +19,12 @@ let connectedUsers = [];
 io.on("connection", (socket) => {
   connectedUsers.push(socket.id);
 
-  // console.log("\nconnectedUsers:", connectedUsers);
-
   // Listen for "pre-offer" event from the Client
   socket.on("pre-offer", (data) => {
-    console.log("\nPre-offer requested...");
     const { callType, calleePersonalCode } = data;
+    callType === "VIDEO_PERSONAL_CODE" || callType === "VIDEO_STRANGER"
+      ? console.log("\nVideo Call request sent...")
+      : console.log("\nChat request sent...");
 
     // Search other user via their Personal Code, if found ...
     const otherConnectedUser = connectedUsers.find(
@@ -47,17 +47,16 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log(`\nUser "${socket.id}" disconnected`);
 
+    // Cleanup Array of Connected Users. "userSocketID" will always be equal to "socket.id"
+    // Therefore, nothing will be returned...
     const newConnectedUsers = connectedUsers.filter((userSocketID) => {
-      userSocketID !== socket.id;
+      return userSocketID !== socket.id;
     });
-
+    // ... So we are actually assigning an empty array to "connectedUsers", indirectly cleaning up the variable
     connectedUsers = newConnectedUsers;
-
-    // console.log("\nconnectedUsers:", connectedUsers);
-    // console.log("newConnectedUsers", newConnectedUsers);
   });
 });
 
 server.listen(PORT, () => {
-  console.log(`\nExpress Server listening on Port ${PORT}`);
+  console.log(`\n[ Express Server listening on Port ${PORT} ]`);
 });

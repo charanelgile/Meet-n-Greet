@@ -3,7 +3,9 @@ export const getIncomingCallDialogue = (
   acceptCallHandler,
   rejectCallHandler
 ) => {
-  console.log("\nGetting incoming call dialogue");
+  callTypeInfo === "Video Call" || callTypeInfo === "Video Call"
+    ? console.log("\nIncoming Video Call request...")
+    : console.log("\nIncoming Chat request...");
 
   // Create full-page blurred container
   const dialog = document.createElement("div");
@@ -68,7 +70,5 @@ export const getIncomingCallDialogue = (
   // Append the dialog box to the blurred container
   dialog.appendChild(dialogContent);
 
-  // Appending of all elements above to the container div for testing purposes
-  const dialogHTML = document.getElementById("dialog");
-  dialogHTML.appendChild(dialog);
+  return dialog;
 };
