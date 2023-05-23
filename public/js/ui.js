@@ -41,3 +41,43 @@ export const showCallingDialogue = (cancelCallHandler) => {
   // ... before appending a new dialog box
   dialog.appendChild(callingDialogue);
 };
+
+export const showResponseDialogue = (preOfferResponse) => {
+  let responseDialogue = null;
+
+  // User Not Found
+  if (preOfferResponse === constants.preOfferResponse.USER_NOT_FOUND) {
+    responseDialogue = elements.getResponseDialogue(
+      "User Not Found",
+      "Please check the Personal Code."
+    );
+  }
+  // User Busy
+  if (preOfferResponse === constants.preOfferResponse.REQUEST_UNAVAILABLE) {
+    responseDialogue = elements.getResponseDialogue(
+      "User Busy",
+      "User is currently on a Video Call or Chat. Please try again later."
+    );
+  }
+  // Request Rejected
+  if (preOfferResponse === constants.preOfferResponse.REQUEST_REJECTED) {
+    responseDialogue = elements.getResponseDialogue(
+      "Request Rejected",
+      "User has rejected your request."
+    );
+  }
+
+  if (responseDialogue) {
+    const dialog = document.getElementById("dialog");
+    dialog.appendChild(responseDialogue);
+
+    setTimeout(() => {
+      closeDialog();
+    }, [4000]);
+  }
+};
+
+export const closeDialog = () => {
+  const dialog = document.getElementById("dialog");
+  dialog.querySelectorAll("*").forEach((element) => element.remove());
+};

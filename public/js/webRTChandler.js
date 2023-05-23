@@ -43,6 +43,32 @@ export const handlePreOffer = (data) => {
   }
 };
 
+// Sending Appropriate Response to Video Call or Chat Request
+export const handlePreOfferResponse = (data) => {
+  const { preOfferResponse } = data;
+
+  ui.closeDialog();
+
+  if (preOfferResponse === constants.preOfferResponse.USER_NOT_FOUND) {
+    ui.showResponseDialogue(preOfferResponse);
+    // User Not Found Dialog Box
+  }
+
+  if (preOfferResponse === constants.preOfferResponse.REQUEST_UNAVAILABLE) {
+    ui.showResponseDialogue(preOfferResponse);
+    // User Busy Dialog Box
+  }
+
+  if (preOfferResponse === constants.preOfferResponse.REQUEST_REJECTED) {
+    ui.showResponseDialogue(preOfferResponse);
+    // Request Rejected Dialog Box
+  }
+
+  if (preOfferResponse === constants.preOfferResponse.REQUEST_ACCEPTED) {
+    // Proceed to WebRTC Offer, redirect to Chat or Video Call UI
+  }
+};
+
 // Accept Call
 const acceptCallHandler = () => {
   console.log("Request accepted");
@@ -51,6 +77,7 @@ const acceptCallHandler = () => {
 // Reject Call
 const rejectCallHandler = () => {
   console.log("Request rejected");
+  sendPreOfferResponse();
   sendPreOfferResponse(constants.preOfferResponse.REQUEST_REJECTED);
 };
 // Cancel Call
@@ -60,10 +87,12 @@ const cancelCallHandler = () => {
 
 // Response Handler
 const sendPreOfferResponse = (preOfferResponse) => {
+  // "connectedUserDetails" is declared above using let, therefore no value will be passed to "data.callerSocketId"
   const data = {
     callerSocketId: connectedUserDetails.socketId,
     preOfferResponse,
   };
 
+  ui.closeDialog();
   wss.sendPreOfferResponse(data);
 };

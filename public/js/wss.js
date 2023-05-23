@@ -23,13 +23,18 @@ export const registerSocketEvents = (socket) => {
   socket.on("pre-offer", (data) => {
     webRTChandler.handlePreOffer(data);
   });
+
+  // Listen back for "pre-offer-response" event from the Server
+  socket.on("pre-offer-response", (data) => {
+    webRTChandler.handlePreOfferResponse(data);
+  });
 };
 
 // Emit "pre-offer" event to the Server
 export const sendPreOffer = (data) => {
   data.callType === "VIDEO_PERSONAL_CODE" || data.callType === "VIDEO_STRANGER"
-    ? console.log('\nEmitting "pre-offer" event\nVideo Call request sent...')
-    : console.log('\nEmitting "pre-offer" event\nChat request sent...');
+    ? console.log("\nVideo Call request sent...")
+    : console.log("\nChat request sent...");
 
   socketIO.emit("pre-offer", data);
 };

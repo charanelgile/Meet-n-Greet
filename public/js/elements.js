@@ -16,7 +16,7 @@ export const getIncomingCallDialogue = (
   dialogContent.classList.add("dialog_content");
 
   // Create a paragraph for the incoming type of request
-  const title = document.createElement("paragraph");
+  const title = document.createElement("p");
   title.classList.add("dialog_title");
   title.innerHTML = `Incoming ${callTypeInfo} Request`;
 
@@ -81,7 +81,7 @@ export const getIncomingCallDialogue = (
   return dialog;
 };
 
-// =======================================================
+// ============================================================================
 
 export const getCallingDialogue = (cancelCallHandler) => {
   // Create full-page blurred container
@@ -92,8 +92,8 @@ export const getCallingDialogue = (cancelCallHandler) => {
   const dialogContent = document.createElement("div");
   dialogContent.classList.add("dialog_content");
 
-  // Create a paragraph for the incoming type of request
-  const title = document.createElement("paragraph");
+  // Create a paragraph for the outgoing request
+  const title = document.createElement("p");
   title.classList.add("dialog_title");
   title.innerHTML = `Outgoing request...`;
 
@@ -139,3 +139,49 @@ export const getCallingDialogue = (cancelCallHandler) => {
 
   return dialog;
 };
+
+// ============================================================================
+
+export const getResponseDialogue = (responseTitle, responseDescription) => {
+  // Create full-page blurred container
+  const dialog = document.createElement("div");
+  dialog.classList.add("dialog_wrapper");
+
+  // Create dialog box
+  const dialogContent = document.createElement("div");
+  dialogContent.classList.add("dialog_content");
+
+  // Create a paragraph for the Response Title and Description
+  const title = document.createElement("p");
+  title.classList.add("dialog_title");
+  title.innerHTML = responseTitle;
+  const description = document.createElement("p");
+  description.classList.add("dialog_description");
+  description.innerHTML = responseDescription;
+
+  // Create avatar image container
+  const imageContainer = document.createElement("div");
+  imageContainer.classList.add("dialog_image_container");
+
+  // Create avatar image
+  const image = document.createElement("img");
+  const avatarImagePath = "./utils/images/dialogAvatar.png";
+  image.src = avatarImagePath;
+
+  // ----------------------------------------
+
+  // Append the avatar image to the container
+  imageContainer.appendChild(image);
+
+  // Append the containers to the dialog box
+  dialogContent.appendChild(title);
+  dialogContent.appendChild(imageContainer);
+  dialogContent.appendChild(description);
+
+  // Append the dialog box to the blurred container
+  dialog.appendChild(dialogContent);
+
+  return dialog;
+};
+
+// ============================================================================
