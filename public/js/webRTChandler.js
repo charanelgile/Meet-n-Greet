@@ -43,14 +43,27 @@ export const handlePreOffer = (data) => {
   }
 };
 
+// Accept Call
 const acceptCallHandler = () => {
   console.log("Request accepted");
+  sendPreOfferResponse(constants.preOfferResponse.REQUEST_ACCEPTED);
 };
-
+// Reject Call
 const rejectCallHandler = () => {
   console.log("Request rejected");
+  sendPreOfferResponse(constants.preOfferResponse.REQUEST_REJECTED);
 };
-
+// Cancel Call
 const cancelCallHandler = () => {
   console.log("Request cancelled");
+};
+
+// Response Handler
+const sendPreOfferResponse = (preOfferResponse) => {
+  const data = {
+    callerSocketId: connectedUserDetails.socketId,
+    preOfferResponse,
+  };
+
+  wss.sendPreOfferResponse(data);
 };

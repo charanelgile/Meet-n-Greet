@@ -33,3 +33,8 @@ export const sendPreOffer = (data) => {
 
   socketIO.emit("pre-offer", data);
 };
+
+// Emit "pre-offer-response" event to the Server
+export const sendPreOfferResponse = (data) => {
+  socketIO.emit("pre-offer-response", data);
+};

@@ -44,6 +44,13 @@ io.on("connection", (socket) => {
     }
   });
 
+  // Listen for "pre-offer-response" event from the Client
+  socket.on("pre-offer-response", (data) => {
+    console.log("\nResponse received:");
+    console.log(data);
+  });
+
+  // Listen for "disconnect" event from the Client
   socket.on("disconnect", () => {
     console.log(`\nUser "${socket.id}" disconnected`);
 

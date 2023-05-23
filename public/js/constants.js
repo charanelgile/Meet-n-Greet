@@ -4,3 +4,10 @@ export const callType = {
   VIDEO_STRANGER: "VIDEO_STRANGER",
   CHAT_STRANGER: "CHAT_STRANGER",
 };
+
+export const preOfferResponse = {
+  USER_NOT_FOUND: "USER_NOT_FOUND",
+  REQUEST_ACCEPTED: "REQUEST_ACCEPTED",
+  REQUEST_REJECTED: "REQUEST_REJECTED",
+  REQUEST_UNAVAILABLE: "REQUEST_UNAVAILABLE", // When user is busy on another chat or video call
+};

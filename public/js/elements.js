@@ -70,8 +70,18 @@ export const getIncomingCallDialogue = (
   // Append the dialog box to the blurred container
   dialog.appendChild(dialogContent);
 
+  // Add Event Listeners to Buttons
+  acceptCallButton.addEventListener("click", () => {
+    acceptCallHandler();
+  });
+  rejectCallButton.addEventListener("click", () => {
+    rejectCallHandler();
+  });
+
   return dialog;
 };
+
+// =======================================================
 
 export const getCallingDialogue = (cancelCallHandler) => {
   // Create full-page blurred container
