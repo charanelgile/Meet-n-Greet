@@ -1,8 +1,79 @@
 import * as ui from "./ui.js";
 import * as wss from "./wss.js";
 import * as constants from "./constants.js";
+import * as store from "./store.js";
 
 let connectedUserDetails;
+
+const defaultConstraints = {
+  audio: true,
+  video: true,
+};
+
+let peerConnection;
+
+const configuration = {
+  iceServers: [
+    {
+      urls: "stun:stun.1.google.com:13902",
+    },
+  ],
+};
+
+// Preview Local Video
+export const getLocalPreview = () => {
+  navigator.mediaDevices
+    .getUserMedia(defaultConstraints)
+    .then((localStream) => {
+      ui.updateLocalVideo(localStream);
+      store.setLocalStream(localStream);
+    })
+    .catch((error) => {
+      console.log("Unable to access Audio / Video");
+      console.log(error);
+    });
+};
+
+// Create a WebRTC Peer Connection
+const createPeerConnection = () => {
+  peerConnection = new RTCPeerConnection(configuration);
+
+  // Event Listener when an ICE Candidate is received
+  peerConnection.onicecandidate = (event) => {
+    console.log("Getting ICE Candidates from the STUN Server");
+    if (event.candidate) {
+      // Send ICE Candidates to the other user
+    }
+  };
+
+  // Event Listener when Connection State has changed
+  peerConnection.onconnectionstatechange = (event) => {
+    if (peerConnection.connectionState === "connected") {
+      console.log("Successfully connected with the other user");
+    }
+  };
+
+  // Receive Tracks (Remote Video Stream) when connection is established
+  const remoteStream = new MediaStream();
+  store.setRemoteStream(remoteStream);
+  ui.updateRemoteVideo(remoteStream);
+
+  // Event Listener when Tracks are received
+  peerConnection.ontrack = (event) => {
+    remoteStream.addTrack(event.track);
+  };
+
+  // Add Tracks to the Peer Connection
+  if (
+    connectedUserDetails.callType === constants.callType.VIDEO_PERSONAL_CODE
+  ) {
+    const localStream = store.getState().localStream;
+    // Send local stream to the other user
+    for (const track of localStream.getTracks()) {
+      peerConnection.addTrack(track, localStream);
+    }
+  }
+};
 
 // Sending Video Call or Chat Request
 export const sendPreOffer = (callType, calleePersonalCode) => {

@@ -1,6 +1,7 @@
 import * as elements from "./elements.js";
 import * as constants from "./constants.js";
 
+// Assign a Personal Code
 export const updatePersonalCode = (personalCode) => {
   const personalCodeParagraph = document.getElementById(
     "personal_code_paragraph"
@@ -9,6 +10,17 @@ export const updatePersonalCode = (personalCode) => {
   personalCodeParagraph.innerHTML = personalCode;
 };
 
+// Local Video Stream
+export const updateLocalVideo = (stream) => {
+  const localVideo = document.getElementById("local_video");
+  localVideo.srcObject = stream;
+
+  localVideo.addEventListener("loadedmetadata", () => {
+    localVideo.play();
+  });
+};
+
+// Video Call and Chat Connection-related Functions
 export const showIncomingCallDialogue = (
   callType,
   acceptCallHandler,

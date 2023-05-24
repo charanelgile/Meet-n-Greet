@@ -9,6 +9,9 @@ const socket = io("/");
 // Pass connection to registerSocketEvents() from "./wss.js"
 wss.registerSocketEvents(socket);
 
+// Preview Local Video
+webRTChandler.getLocalPreview();
+
 // Element References for Event Listeners & Handlers
 const personalCodeCopyButton = document.getElementById(
   "personal_code_copy_button" // Copy Personal Code
