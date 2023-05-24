@@ -65,6 +65,7 @@ export const handlePreOfferResponse = (data) => {
   }
 
   if (preOfferResponse === constants.preOfferResponse.REQUEST_ACCEPTED) {
+    ui.showControls(connectedUserDetails.callType);
     // Proceed to WebRTC Offer, redirect to Chat or Video Call UI
   }
 };
@@ -73,6 +74,7 @@ export const handlePreOfferResponse = (data) => {
 const acceptCallHandler = () => {
   console.log("Request accepted");
   sendPreOfferResponse(constants.preOfferResponse.REQUEST_ACCEPTED);
+  ui.showControls(connectedUserDetails.callType);
 };
 // Reject Call
 const rejectCallHandler = () => {

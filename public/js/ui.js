@@ -73,11 +73,79 @@ export const showResponseDialogue = (preOfferResponse) => {
 
     setTimeout(() => {
       closeDialog();
-    }, [4000]);
+    }, [2500]);
   }
 };
 
 export const closeDialog = () => {
   const dialog = document.getElementById("dialog");
   dialog.querySelectorAll("*").forEach((element) => element.remove());
+};
+
+// Check which Controls to Show - Chat or Video Call
+export const showControls = (callType) => {
+  if (callType === constants.callType.CHAT_PERSONAL_CODE) {
+    showControlsChat();
+  }
+
+  if (callType === constants.callType.VIDEO_PERSONAL_CODE) {
+    showControlsVideoCall();
+  }
+};
+
+// Show Controls - Chat
+const showControlsChat = () => {
+  const newMessageInput = document.getElementById("new_message");
+  const endChatButtonContainer = document.getElementById(
+    "finish_chat_button_container"
+  );
+
+  showElement(newMessageInput);
+  showElement(endChatButtonContainer);
+
+  disableDashboard();
+};
+
+// Show Controls - Video Call
+const showControlsVideoCall = () => {
+  const newMessageInput = document.getElementById("new_message");
+  const videoControls = document.getElementById("call_buttons");
+  const remoteVideo = document.getElementById("remote_video");
+
+  showElement(newMessageInput);
+  showElement(videoControls);
+  showElement(remoteVideo);
+
+  disableDashboard();
+};
+
+// UI Helper Functions
+const enableDashboard = () => {
+  // Hide the dashboard blocker by adding the class "display_none", therefore enabling the dashboard
+  const dashboardBlocker = document.getElementById("dashboard_blur");
+  if (!dashboardBlocker.classList.contains("display_none")) {
+    dashboardBlocker.classList.add("display_none");
+  }
+};
+
+const disableDashboard = () => {
+  // Show the dashboard blocker by removing the class "display_none", therefore disabling the dashboard
+  const dashboardBlocker = document.getElementById("dashboard_blur");
+  if (dashboardBlocker.classList.contains("display_none")) {
+    dashboardBlocker.classList.remove("display_none");
+  }
+};
+
+const hideElement = (element) => {
+  // Hide an element by adding the class "display_none"
+  if (!element.classList.contains("display_none")) {
+    element.classList.add("display_none");
+  }
+};
+
+const showElement = (element) => {
+  // Show an element by removing the class "display_none"
+  if (element.classList.contains("display_none")) {
+    element.classList.remove("display_none");
+  }
 };
