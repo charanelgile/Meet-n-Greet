@@ -110,10 +110,12 @@ const showControlsChat = () => {
 const showControlsVideoCall = () => {
   const newMessageInput = document.getElementById("new_message");
   const videoControls = document.getElementById("call_buttons");
+  const placeholder = document.getElementById("video_placeholder");
   const remoteVideo = document.getElementById("remote_video");
 
   showElement(newMessageInput);
   showElement(videoControls);
+  hideElement(placeholder);
   showElement(remoteVideo);
 
   disableDashboard();
