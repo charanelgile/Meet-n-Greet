@@ -52,16 +52,15 @@ io.on("connection", (socket) => {
 
   // Listen for "pre-offer-response" event from the Client
   socket.on("pre-offer-response", (data) => {
-    // As a workaround, get the value from "socket.id" and pass it to "data.callerSocketId"
-    data.callerSocketId = socket.id;
-
-    console.log("\nResponse received:");
-    console.log(data);
-
     // Search other user via their Personal Code, if found ...
     const otherConnectedUser = connectedUsers.find(
-      (socketID) => socketID === data.callerSocketId
+      (socketID) => socketID !== socket.id
     );
+
+    data.callerSocketId = otherConnectedUser;
+
+    console.log("\nResponse sent to requestor:");
+    console.log(data);
 
     if (otherConnectedUser) {
       // ... emit "pre-offer-response" event to the Client
