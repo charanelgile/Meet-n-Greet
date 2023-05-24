@@ -114,6 +114,38 @@ export const handlePreOffer = (data) => {
   }
 };
 
+// Accept Call
+const acceptCallHandler = () => {
+  console.log("Request accepted");
+
+  createPeerConnection();
+
+  sendPreOfferResponse(constants.preOfferResponse.REQUEST_ACCEPTED);
+  ui.showControls(connectedUserDetails.callType);
+};
+// Reject Call
+const rejectCallHandler = () => {
+  console.log("Request rejected");
+
+  sendPreOfferResponse(constants.preOfferResponse.REQUEST_REJECTED);
+};
+// Cancel Call
+const cancelCallHandler = () => {
+  console.log("Request cancelled");
+};
+
+// Response Handler
+const sendPreOfferResponse = (preOfferResponse) => {
+  // "connectedUserDetails" is declared above using let, therefore no value will be passed to "data.callerSocketId"
+  const data = {
+    callerSocketId: connectedUserDetails.socketId,
+    preOfferResponse,
+  };
+
+  ui.closeDialog();
+  wss.sendPreOfferResponse(data);
+};
+
 // Sending Appropriate Response to Video Call or Chat Request
 export const handlePreOfferResponse = (data) => {
   const { preOfferResponse } = data;
@@ -156,39 +188,23 @@ const sendWebRTCOffer = async () => {
   });
 };
 
-export const handleWebRTCOffer = (data) => {
-  console.log("WebRTC Offer received");
-  console.log(data);
+// Handle WebRTC Offer
+export const handleWebRTCOffer = async (data) => {
+  console.log("WebRTC Offer received...");
+  await peerConnection.setRemoteDescription(data.offer);
+
+  const answer = await peerConnection.createAnswer();
+  await peerConnection.setLocalDescription(answer);
+
+  wss.sendWebRTCSignalingData({
+    recipientSocketID: connectedUserDetails.socketId,
+    type: constants.webRTCSignal.ANSWER,
+    answer: answer,
+  });
 };
 
-// Accept Call
-const acceptCallHandler = () => {
-  console.log("Request accepted");
-
-  createPeerConnection();
-
-  sendPreOfferResponse(constants.preOfferResponse.REQUEST_ACCEPTED);
-  ui.showControls(connectedUserDetails.callType);
-};
-// Reject Call
-const rejectCallHandler = () => {
-  console.log("Request rejected");
-
-  sendPreOfferResponse(constants.preOfferResponse.REQUEST_REJECTED);
-};
-// Cancel Call
-const cancelCallHandler = () => {
-  console.log("Request cancelled");
-};
-
-// Response Handler
-const sendPreOfferResponse = (preOfferResponse) => {
-  // "connectedUserDetails" is declared above using let, therefore no value will be passed to "data.callerSocketId"
-  const data = {
-    callerSocketId: connectedUserDetails.socketId,
-    preOfferResponse,
-  };
-
-  ui.closeDialog();
-  wss.sendPreOfferResponse(data);
+// Handle WebRTC Answer
+export const handleWebRTCAnswer = async (data) => {
+  console.log("WebRTC Answer sent...");
+  await peerConnection.setRemoteDescription(data.answer);
 };
