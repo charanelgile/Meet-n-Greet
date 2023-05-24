@@ -20,6 +20,12 @@ export const updateLocalVideo = (stream) => {
   });
 };
 
+// Remote Video Stream
+export const updateRemoteVideo = (stream) => {
+  const remoteVideo = document.getElementById("remote_video");
+  remoteVideo.srcObject = stream;
+};
+
 // Video Call and Chat Connection-related Functions
 export const showIncomingCallDialogue = (
   callType,

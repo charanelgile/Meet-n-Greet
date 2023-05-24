@@ -121,36 +121,59 @@ export const handlePreOfferResponse = (data) => {
   ui.closeDialog();
 
   if (preOfferResponse === constants.preOfferResponse.USER_NOT_FOUND) {
-    ui.showResponseDialogue(preOfferResponse);
     // User Not Found Dialog Box
+    ui.showResponseDialogue(preOfferResponse);
   }
 
   if (preOfferResponse === constants.preOfferResponse.REQUEST_UNAVAILABLE) {
-    ui.showResponseDialogue(preOfferResponse);
     // User Busy Dialog Box
+    ui.showResponseDialogue(preOfferResponse);
   }
 
   if (preOfferResponse === constants.preOfferResponse.REQUEST_REJECTED) {
-    ui.showResponseDialogue(preOfferResponse);
     // Request Rejected Dialog Box
+    ui.showResponseDialogue(preOfferResponse);
   }
 
   if (preOfferResponse === constants.preOfferResponse.REQUEST_ACCEPTED) {
+    // Proceed to WebRTC Offer and load to Chat or Video Call UI
     ui.showControls(connectedUserDetails.callType);
-    // Proceed to WebRTC Offer, redirect to Chat or Video Call UI
+
+    createPeerConnection();
+    sendWebRTCOffer();
   }
+};
+
+// Send WebRTC Offer
+const sendWebRTCOffer = async () => {
+  const offer = await peerConnection.createOffer();
+  await peerConnection.setLocalDescription(offer);
+
+  wss.sendWebRTCSignalingData({
+    recipientSocketID: connectedUserDetails.socketId,
+    type: constants.webRTCSignal.OFFER,
+    offer: offer,
+  });
+};
+
+export const handleWebRTCOffer = (data) => {
+  console.log("WebRTC Offer received");
+  console.log(data);
 };
 
 // Accept Call
 const acceptCallHandler = () => {
   console.log("Request accepted");
+
+  createPeerConnection();
+
   sendPreOfferResponse(constants.preOfferResponse.REQUEST_ACCEPTED);
   ui.showControls(connectedUserDetails.callType);
 };
 // Reject Call
 const rejectCallHandler = () => {
   console.log("Request rejected");
-  sendPreOfferResponse();
+
   sendPreOfferResponse(constants.preOfferResponse.REQUEST_REJECTED);
 };
 // Cancel Call

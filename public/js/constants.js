@@ -11,3 +11,9 @@ export const preOfferResponse = {
   REQUEST_REJECTED: "REQUEST_REJECTED",
   REQUEST_UNAVAILABLE: "REQUEST_UNAVAILABLE", // When user is busy on another chat or video call
 };
+
+export const webRTCSignal = {
+  OFFER: "OFFER",
+  ANSWER: "ANSWER",
+  ICE_CANDIDATE: "ICE_CANDIDATE",
+};

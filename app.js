@@ -68,6 +68,21 @@ io.on("connection", (socket) => {
     }
   });
 
+  // Listen for "webRTC-signal" event from the Client
+  socket.on("webRTC-signal", (data) => {
+    const { recipientSocketID } = data;
+
+    // Search user via their Personal Code, if found ...
+    const connectedPeer = connectedUsers.find(
+      (socketID) => socketID === recipientSocketID
+    );
+
+    if (connectedPeer) {
+      // ... emit "webRTC-signal" event to the Client
+      io.to(recipientSocketID).emit("webRTC-signal", data);
+    }
+  });
+
   // Listen for "disconnect" event from the Client
   socket.on("disconnect", () => {
     console.log(`\nUser "${socket.id}" disconnected`);
